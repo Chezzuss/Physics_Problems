@@ -18,13 +18,13 @@ You have a supply of exactly three $1\,\Omega$ resistors. What are all the possi
 
 Calculate the equivalent resistance for the circuit shown in the figure. All resistors have a resistance of $5\ \Omega$.
 
-![width:100px](image-r1.png)
+![alt](image-r1.png)
 
 ## 4. Mixed Circuit
 
 Calculate the equivalent resistance for the circuit shown in the figure. All resistors have a resistance of $10\ \Omega$.
 
-![width:100px](image-r2.png)
+![alt](image-r2.png)
 
 ## 5. Kirchhoff's Laws
 
@@ -34,13 +34,13 @@ Using Kirchhoff’s laws, find the currents $I_1$, $I_2$, $I_3$ (going through t
 - Right loop: source $\mathcal{E}_2 = 9\,\text{V}$ in series with internal resistance $r_w = 1\,\Omega$.
 - Shared branch: resistor $R_2 = 10\,\Omega$ connecting the top-right node to the bottom node.
 
-![width:100px](image-k1.png)
+![alt](image-k1.png)
 
 ## 6. Kirchhoff's Laws again
 
 Calculate the current flowing through the ammeter.
 
-![width:100px](image-k2.png)
+![alt](image-k2.png)
 
 ## 7. Capacitors in Parallel
 
