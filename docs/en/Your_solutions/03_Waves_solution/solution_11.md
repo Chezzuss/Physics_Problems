@@ -1,122 +1,52 @@
-
-FILE: `task_11.md`
-# Task 11 – Animation of Two-Slit Interference
-
-## Problem Statement
-
-Construct an HTML animation of Young's double-slit experiment in which two slits act as coherent point sources. The displacement field is
-
-$$
-u(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_1}|} \sin(k |\vec{r} - \vec{r_1}| - \omega t) + \frac{A}{|\vec{r}-\vec{r_2}|} \sin(k |\vec{r} - \vec{r_2}| - \omega t)
-$$
-
-The user must be able to adjust the slit separation
-
-$$
-d = |\vec{r_1} - \vec{r_2}|
-$$
-
-and the wavelength $\lambda$. The animation must visualize the interference pattern in real time.
-
-## Theory
-
-In Young's experiment, the two slits behave as coherent sources emitting waves of the same frequency and phase. The total disturbance is the sum of the disturbances from each slit:
-
-$$
-u(\vec{r},t) = u_1(\vec{r},t) + u_2(\vec{r},t)
-$$
-
-with
-
-$$
-u_1(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_1}|} \sin(k |\vec{r} - \vec{r_1}| - \omega t)
-$$
-
-and
-
-$$
-u_2(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_2}|} \sin(k |\vec{r} - \vec{r_2}| - \omega t)
-$$
-
-The wave number is
-
-$$
-k = \frac{2\pi}{\lambda}
-$$
-
-Constructive interference occurs where the path difference is an integer multiple of the wavelength, while destructive interference occurs where the path difference is a half-integer multiple.
-
-## Step-by-Step Solution
-
-### 1. Geometry of the slits
-
-The slits are placed symmetrically with respect to the center:
-
-$$
-\vec{r_1} = (x_0, y_0 - d/2)
-$$
-
-$$
-\vec{r_2} = (x_0, y_0 + d/2)
-$$
-
-### 2. Superposition
-
-For every point in the observation region, compute the distances to both slits, evaluate the two wave contributions, and add them.
-
-### 3. Adjustable parameters
-
-The user must be able to change:
-
-- slit distance $d$
-- wavelength $\lambda$
-
-This changes the fringe spacing and overall interference geometry.
-
-### 4. Real-time rendering
-
-The field is recomputed at each animation frame for the current values of the parameters.
-
-## Final Result
-
-The following HTML file implements the Young's double-slit interference simulation.
-
-## Interpretation
-
-When the slit separation increases, the interference fringes become more closely spaced. When the wavelength increases, the fringes spread farther apart.
-
-## HTML Source
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Young Double-Slit Interference</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
       background: #f4f4f4;
+      color: #222;
     }
+
+    h1 {
+      margin-bottom: 12px;
+    }
+
     .panel {
       background: white;
       padding: 16px;
       border-radius: 10px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      max-width: 900px;
     }
+
     .row {
       margin: 10px 0;
     }
+
     label {
       display: inline-block;
-      min-width: 160px;
+      min-width: 180px;
     }
+
     canvas {
       border: 1px solid #ccc;
       background: black;
       image-rendering: pixelated;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #444;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -131,22 +61,26 @@ When the slit separation increases, the interference fringes become more closely
     </div>
 
     <div class="row">
-      <label for="lambdaSlider">Wavelength</label>
+      <label for="lambdaSlider">Wavelength λ</label>
       <input id="lambdaSlider" type="range" min="10" max="120" step="1" value="35">
       <span id="lambdaValue">35</span>
     </div>
 
     <div class="row">
-      <label for="omegaSlider">Angular frequency</label>
+      <label for="omegaSlider">Angular frequency ω</label>
       <input id="omegaSlider" type="range" min="0.5" max="12" step="0.1" value="5">
       <span id="omegaValue">5.0</span>
     </div>
 
     <div class="row">
-      <label for="ampSlider">Amplitude</label>
+      <label for="ampSlider">Amplitude A</label>
       <input id="ampSlider" type="range" min="0.2" max="4" step="0.1" value="1.2">
       <span id="ampValue">1.2</span>
     </div>
+
+    <p class="note">
+      Open this file directly in a browser, or use a VS Code extension such as Live Server.
+    </p>
   </div>
 
   <div class="panel">
@@ -159,10 +93,13 @@ When the slit separation increases, the interference fringes become more closely
 
     const dSlider = document.getElementById("dSlider");
     const dValue = document.getElementById("dValue");
+
     const lambdaSlider = document.getElementById("lambdaSlider");
     const lambdaValue = document.getElementById("lambdaValue");
+
     const omegaSlider = document.getElementById("omegaSlider");
     const omegaValue = document.getElementById("omegaValue");
+
     const ampSlider = document.getElementById("ampSlider");
     const ampValue = document.getElementById("ampValue");
 
@@ -179,23 +116,23 @@ When the slit separation increases, the interference fringes become more closely
     function updateLabels() {
       dValue.textContent = dSlider.value;
       lambdaValue.textContent = lambdaSlider.value;
-      omegaValue.textContent = parseFloat(omegaSlider.value).toFixed(1);
-      ampValue.textContent = parseFloat(ampSlider.value).toFixed(1);
+      omegaValue.textContent = Number(omegaSlider.value).toFixed(1);
+      ampValue.textContent = Number(ampSlider.value).toFixed(1);
     }
 
     [dSlider, lambdaSlider, omegaSlider, ampSlider].forEach(el => {
       el.addEventListener("input", updateLabels);
     });
 
-    function clamp(v, min, max) {
-      return Math.max(min, Math.min(max, v));
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
     }
 
     function draw() {
-      const d = parseFloat(dSlider.value);
-      const lambda = parseFloat(lambdaSlider.value);
-      const omega = parseFloat(omegaSlider.value);
-      const A = parseFloat(ampSlider.value);
+      const d = Number(dSlider.value);
+      const lambda = Number(lambdaSlider.value);
+      const omega = Number(omegaSlider.value);
+      const A = Number(ampSlider.value);
 
       const k = 2 * Math.PI / lambda;
 
@@ -214,20 +151,20 @@ When the slit separation increases, the interference fringes become more closely
           const x = i * width / w;
           const y = j * height / h;
 
-          let d1 = Math.hypot(x - r1.x, y - r1.y);
-          let d2 = Math.hypot(x - r2.x, y - r2.y);
+          let dist1 = Math.hypot(x - r1.x, y - r1.y);
+          let dist2 = Math.hypot(x - r2.x, y - r2.y);
 
-          d1 = Math.max(d1, 1.0);
-          d2 = Math.max(d2, 1.0);
+          dist1 = Math.max(dist1, 1.0);
+          dist2 = Math.max(dist2, 1.0);
 
           const u =
-            (A / d1) * Math.sin(k * d1 - omega * time) +
-            (A / d2) * Math.sin(k * d2 - omega * time);
+            (A / dist1) * Math.sin(k * dist1 - omega * time) +
+            (A / dist2) * Math.sin(k * dist2 - omega * time);
 
           const scaled = clamp(Math.round(127 + 220 * u), 0, 255);
           const idx = 4 * (j * w + i);
 
-          img.data[idx + 0] = scaled;
+          img.data[idx] = scaled;
           img.data[idx + 1] = scaled;
           img.data[idx + 2] = 255 - scaled;
           img.data[idx + 3] = 255;
