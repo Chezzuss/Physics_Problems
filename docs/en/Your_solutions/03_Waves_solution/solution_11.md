@@ -1,4 +1,93 @@
-html
+
+FILE: `task_11.md`
+# Task 11 – Animation of Two-Slit Interference
+
+## Problem Statement
+
+Construct an HTML animation of Young's double-slit experiment in which two slits act as coherent point sources. The displacement field is
+
+$$
+u(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_1}|} \sin(k |\vec{r} - \vec{r_1}| - \omega t) + \frac{A}{|\vec{r}-\vec{r_2}|} \sin(k |\vec{r} - \vec{r_2}| - \omega t)
+$$
+
+The user must be able to adjust the slit separation
+
+$$
+d = |\vec{r_1} - \vec{r_2}|
+$$
+
+and the wavelength $\lambda$. The animation must visualize the interference pattern in real time.
+
+## Theory
+
+In Young's experiment, the two slits behave as coherent sources emitting waves of the same frequency and phase. The total disturbance is the sum of the disturbances from each slit:
+
+$$
+u(\vec{r},t) = u_1(\vec{r},t) + u_2(\vec{r},t)
+$$
+
+with
+
+$$
+u_1(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_1}|} \sin(k |\vec{r} - \vec{r_1}| - \omega t)
+$$
+
+and
+
+$$
+u_2(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_2}|} \sin(k |\vec{r} - \vec{r_2}| - \omega t)
+$$
+
+The wave number is
+
+$$
+k = \frac{2\pi}{\lambda}
+$$
+
+Constructive interference occurs where the path difference is an integer multiple of the wavelength, while destructive interference occurs where the path difference is a half-integer multiple.
+
+## Step-by-Step Solution
+
+### 1. Geometry of the slits
+
+The slits are placed symmetrically with respect to the center:
+
+$$
+\vec{r_1} = (x_0, y_0 - d/2)
+$$
+
+$$
+\vec{r_2} = (x_0, y_0 + d/2)
+$$
+
+### 2. Superposition
+
+For every point in the observation region, compute the distances to both slits, evaluate the two wave contributions, and add them.
+
+### 3. Adjustable parameters
+
+The user must be able to change:
+
+- slit distance $d$
+- wavelength $\lambda$
+
+This changes the fringe spacing and overall interference geometry.
+
+### 4. Real-time rendering
+
+The field is recomputed at each animation frame for the current values of the parameters.
+
+## Final Result
+
+The following HTML file implements the Young's double-slit interference simulation.
+
+## Interpretation
+
+When the slit separation increases, the interference fringes become more closely spaced. When the wavelength increases, the fringes spread farther apart.
+
+## HTML Source
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
