@@ -1,204 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Young Double-Slit Interference</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f4f4f4;
-      color: #222;
-    }
+# Task 11 – Animation of Two-Slit Interference
 
-    h1 {
-      margin-bottom: 12px;
-    }
+## Problem Statement
 
-    .panel {
-      background: white;
-      padding: 16px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      max-width: 900px;
-    }
+Construct an HTML animation of Young's double-slit experiment in which two slits act as coherent point sources. The displacement field is
 
-    .row {
-      margin: 10px 0;
-    }
+$$
+u(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_1}|} \sin(k |\vec{r} - \vec{r_1}| - \omega t) + \frac{A}{|\vec{r}-\vec{r_2}|} \sin(k |\vec{r} - \vec{r_2}| - \omega t)
+$$
 
-    label {
-      display: inline-block;
-      min-width: 180px;
-    }
+The user must be able to adjust the slit separation
 
-    canvas {
-      border: 1px solid #ccc;
-      background: black;
-      image-rendering: pixelated;
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+$$
+d = |\vec{r_1} - \vec{r_2}|
+$$
 
-    .note {
-      font-size: 14px;
-      color: #444;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Young's Two-Slit Interference</h1>
+and the wavelength $\lambda$. The animation must visualize the interference pattern in real time.
 
-  <div class="panel">
-    <div class="row">
-      <label for="dSlider">Slit separation d</label>
-      <input id="dSlider" type="range" min="10" max="180" step="1" value="60">
-      <span id="dValue">60</span>
-    </div>
+## Theory
 
-    <div class="row">
-      <label for="lambdaSlider">Wavelength λ</label>
-      <input id="lambdaSlider" type="range" min="10" max="120" step="1" value="35">
-      <span id="lambdaValue">35</span>
-    </div>
+In Young's double-slit experiment, the two slits behave as coherent point sources with the same frequency and phase. The resulting displacement is the sum of the contributions from both slits.
 
-    <div class="row">
-      <label for="omegaSlider">Angular frequency ω</label>
-      <input id="omegaSlider" type="range" min="0.5" max="12" step="0.1" value="5">
-      <span id="omegaValue">5.0</span>
-    </div>
+For the two sources located at $\vec{r_1}$ and $\vec{r_2}$, the total field is
 
-    <div class="row">
-      <label for="ampSlider">Amplitude A</label>
-      <input id="ampSlider" type="range" min="0.2" max="4" step="0.1" value="1.2">
-      <span id="ampValue">1.2</span>
-    </div>
+$$
+u(\vec{r},t) = u_1(\vec{r},t) + u_2(\vec{r},t)
+$$
 
-    <p class="note">
-      Open this file directly in a browser, or use a VS Code extension such as Live Server.
-    </p>
-  </div>
+where
 
-  <div class="panel">
-    <canvas id="canvas" width="760" height="460"></canvas>
-  </div>
+$$
+u_1(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_1}|} \sin(k |\vec{r} - \vec{r_1}| - \omega t)
+$$
 
-  <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+and
 
-    const dSlider = document.getElementById("dSlider");
-    const dValue = document.getElementById("dValue");
+$$
+u_2(\vec{r},t) = \frac{A}{|\vec{r}-\vec{r_2}|} \sin(k |\vec{r} - \vec{r_2}| - \omega t)
+$$
 
-    const lambdaSlider = document.getElementById("lambdaSlider");
-    const lambdaValue = document.getElementById("lambdaValue");
+The wave number is related to the wavelength by
 
-    const omegaSlider = document.getElementById("omegaSlider");
-    const omegaValue = document.getElementById("omegaValue");
+$$
+k = \frac{2\pi}{\lambda}
+$$
 
-    const ampSlider = document.getElementById("ampSlider");
-    const ampValue = document.getElementById("ampValue");
+Constructive interference occurs when the path difference is an integer multiple of the wavelength, while destructive interference occurs when the path difference is a half-integer multiple of the wavelength.
 
-    const width = canvas.width;
-    const height = canvas.height;
+## Step-by-Step Solution
 
-    const lowRes = document.createElement("canvas");
-    lowRes.width = 190;
-    lowRes.height = 115;
-    const lowCtx = lowRes.getContext("2d");
+### Geometric configuration
 
-    let time = 0;
+The two slits are placed symmetrically with respect to the horizontal axis. If the slit separation is $d$, their positions may be written as
 
-    function updateLabels() {
-      dValue.textContent = dSlider.value;
-      lambdaValue.textContent = lambdaSlider.value;
-      omegaValue.textContent = Number(omegaSlider.value).toFixed(1);
-      ampValue.textContent = Number(ampSlider.value).toFixed(1);
-    }
+$$
+\vec{r_1} = (x_0, y_0 - d/2)
+$$
 
-    [dSlider, lambdaSlider, omegaSlider, ampSlider].forEach(el => {
-      el.addEventListener("input", updateLabels);
-    });
+$$
+\vec{r_2} = (x_0, y_0 + d/2)
+$$
 
-    function clamp(value, min, max) {
-      return Math.max(min, Math.min(max, value));
-    }
+### Superposition of waves
 
-    function draw() {
-      const d = Number(dSlider.value);
-      const lambda = Number(lambdaSlider.value);
-      const omega = Number(omegaSlider.value);
-      const A = Number(ampSlider.value);
+At each point of the observation region, the distances to the two slits are computed. The displacement is obtained by summing the two partial waves.
 
-      const k = 2 * Math.PI / lambda;
+### Adjustable parameters
 
-      const x0 = 120;
-      const y0 = height / 2;
+The animation allows real-time control of:
 
-      const r1 = { x: x0, y: y0 - d / 2 };
-      const r2 = { x: x0, y: y0 + d / 2 };
+- slit separation $d$
+- wavelength $\lambda$
+- angular frequency $\omega$
+- amplitude $A$
 
-      const w = lowRes.width;
-      const h = lowRes.height;
-      const img = lowCtx.createImageData(w, h);
+### Numerical visualization
 
-      for (let j = 0; j < h; j++) {
-        for (let i = 0; i < w; i++) {
-          const x = i * width / w;
-          const y = j * height / h;
+The interference pattern is rendered on a two-dimensional canvas. For each pixel, the displacement is evaluated and mapped to a color scale.
 
-          let dist1 = Math.hypot(x - r1.x, y - r1.y);
-          let dist2 = Math.hypot(x - r2.x, y - r2.y);
+## Final Result
 
-          dist1 = Math.max(dist1, 1.0);
-          dist2 = Math.max(dist2, 1.0);
+The simulation is implemented in a separate HTML file:
 
-          const u =
-            (A / dist1) * Math.sin(k * dist1 - omega * time) +
-            (A / dist2) * Math.sin(k * dist2 - omega * time);
+`task_11_animation.html`
 
-          const scaled = clamp(Math.round(127 + 220 * u), 0, 255);
-          const idx = 4 * (j * w + i);
+## Interpretation
 
-          img.data[idx] = scaled;
-          img.data[idx + 1] = scaled;
-          img.data[idx + 2] = 255 - scaled;
-          img.data[idx + 3] = 255;
-        }
-      }
-
-      lowCtx.putImageData(img, 0, 0);
-
-      ctx.clearRect(0, 0, width, height);
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(lowRes, 0, 0, width, height);
-
-      ctx.strokeStyle = "white";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(x0, 0);
-      ctx.lineTo(x0, height);
-      ctx.stroke();
-
-      ctx.fillStyle = "white";
-      ctx.beginPath();
-      ctx.arc(r1.x, r1.y, 5, 0, 2 * Math.PI);
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.arc(r2.x, r2.y, 5, 0, 2 * Math.PI);
-      ctx.fill();
-
-      time += 0.05;
-      requestAnimationFrame(draw);
-    }
-
-    updateLabels();
-    draw();
-  </script>
-</body>
-</html>
+If the slit separation increases, the interference fringes become more closely spaced. If the wavelength increases, the fringes spread farther apart. The simulation makes these dependencies visible in real time.
