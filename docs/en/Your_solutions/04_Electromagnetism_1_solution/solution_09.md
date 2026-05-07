@@ -18,7 +18,7 @@ Find the magnitude of the magnetic force on the proton.
 
 ## Theory
 
-The magnetic force acting on a moving charged particle is
+The magnetic force acting on a moving charged particle is given by
 
 $$
 \vec{F} = q\vec{v} \times \vec{B}
@@ -36,7 +36,7 @@ $$
 q = 1.602 \times 10^{-19} \ \mathrm{C}
 $$
 
-The magnitude of the force is
+The magnitude of the magnetic force is
 
 $$
 F = q|\vec{v} \times \vec{B}|
@@ -56,28 +56,28 @@ $$
 \vec{B} = (1, 2, -1)
 $$
 
-Compute the cross product:
+Compute the cross product using the component formula:
 
 $$
 \vec{v} \times \vec{B}
 =
-\begin{pmatrix}
-\hat{i} & \hat{j} & \hat{k} \\
-2 & -4 & 1 \\
-1 & 2 & -1
-\end{pmatrix}
+\bigl(
+v_yB_z - v_zB_y,\ 
+v_zB_x - v_xB_z,\ 
+v_xB_y - v_yB_x
+\bigr)
 $$
 
-Expand the determinant:
+Substitute the vector components:
 
 $$
 \vec{v} \times \vec{B}
 =
-\hat{i}[(-4)(-1) - (1)(2)]
--
-\hat{j}[(2)(-1) - (1)(1)]
-+
-\hat{k}[(2)(2) - (-4)(1)]
+\bigl(
+(-4)(-1) - (1)(2),\
+(1)(1) - (2)(-1),\
+(2)(2) - (-4)(1)
+\bigr)
 $$
 
 Simplify:
@@ -85,20 +85,10 @@ Simplify:
 $$
 \vec{v} \times \vec{B}
 =
-\hat{i}(4 - 2)
--
-\hat{j}(-2 - 1)
-+
-\hat{k}(4 + 4)
+(2,\ 3,\ 8)
 $$
 
-$$
-\vec{v} \times \vec{B}
-=
-2\hat{i} + 3\hat{j} + 8\hat{k}
-$$
-
-Find the magnitude:
+Find the magnitude of this vector:
 
 $$
 |\vec{v} \times \vec{B}|
@@ -119,7 +109,7 @@ $$
 \approx 8.775
 $$
 
-Now calculate the force:
+Now calculate the magnetic force magnitude:
 
 $$
 F = q|\vec{v} \times \vec{B}|
