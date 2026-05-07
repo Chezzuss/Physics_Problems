@@ -18,7 +18,7 @@ Find the magnitude of the magnetic force on the proton.
 
 ## Theory
 
-The magnetic force acting on a moving charged particle is given by the Lorentz force equation:
+The magnetic force acting on a moving charged particle is
 
 $$
 \vec{F} = q\vec{v} \times \vec{B}
@@ -26,7 +26,6 @@ $$
 
 where:
 
-- $\vec{F}$ is the magnetic force,
 - $q$ is the electric charge,
 - $\vec{v}$ is the velocity vector,
 - $\vec{B}$ is the magnetic field vector.
@@ -57,16 +56,16 @@ $$
 \vec{B} = (1, 2, -1)
 $$
 
-Compute the cross product using the determinant form:
+Compute the cross product:
 
 $$
 \vec{v} \times \vec{B}
 =
-\begin{vmatrix}
+\begin{pmatrix}
 \hat{i} & \hat{j} & \hat{k} \\
 2 & -4 & 1 \\
 1 & 2 & -1
-\end{vmatrix}
+\end{pmatrix}
 $$
 
 Expand the determinant:
@@ -81,7 +80,7 @@ $$
 \hat{k}[(2)(2) - (-4)(1)]
 $$
 
-Simplify each component:
+Simplify:
 
 $$
 \vec{v} \times \vec{B}
@@ -99,7 +98,7 @@ $$
 2\hat{i} + 3\hat{j} + 8\hat{k}
 $$
 
-Find the magnitude of this vector:
+Find the magnitude:
 
 $$
 |\vec{v} \times \vec{B}|
@@ -117,14 +116,10 @@ $$
 |\vec{v} \times \vec{B}|
 =
 \sqrt{77}
-$$
-
-$$
-|\vec{v} \times \vec{B}|
 \approx 8.775
 $$
 
-Now calculate the magnetic force magnitude:
+Now calculate the force:
 
 $$
 F = q|\vec{v} \times \vec{B}|
@@ -148,7 +143,7 @@ $$
 
 ## Interpretation
 
-The proton experiences a very small magnetic force because the proton charge is extremely small. Since the proton has positive charge, the force direction is the same as the direction of the vector product
+The proton experiences a very small magnetic force because the proton charge is extremely small. Since the proton has positive charge, the force direction is the same as the direction of
 
 $$
 \vec{v} \times \vec{B}
