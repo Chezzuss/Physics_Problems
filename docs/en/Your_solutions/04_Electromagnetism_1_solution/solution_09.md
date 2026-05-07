@@ -8,17 +8,17 @@ $$
 \vec{v} = (2\hat{i} - 4\hat{j} + \hat{k}) \ \mathrm{m/s}
 $$
 
-in a region where the magnetic field is
+in a magnetic field
 
 $$
 \vec{B} = (\hat{i} + 2\hat{j} - \hat{k}) \ \mathrm{T}
 $$
 
-Find the magnitude of the magnetic force experienced by the proton.
+Find the magnitude of the magnetic force on the proton.
 
 ## Theory
 
-The magnetic part of the Lorentz force is
+The magnetic force acting on a moving charged particle is given by the Lorentz force equation:
 
 $$
 \vec{F} = q\vec{v} \times \vec{B}
@@ -27,14 +27,14 @@ $$
 where:
 
 - $\vec{F}$ is the magnetic force,
-- $q$ is the charge,
-- $\vec{v}$ is the velocity,
-- $\vec{B}$ is the magnetic field.
+- $q$ is the electric charge,
+- $\vec{v}$ is the velocity vector,
+- $\vec{B}$ is the magnetic field vector.
 
 For a proton,
 
 $$
-q = e = 1.602 \times 10^{-19} \ \mathrm{C}
+q = 1.602 \times 10^{-19} \ \mathrm{C}
 $$
 
 The magnitude of the force is
@@ -45,19 +45,31 @@ $$
 
 ## Step-by-Step Solution
 
-The cross product is
+The vectors are
+
+$$
+\vec{v} = (2, -4, 1)
+$$
+
+and
+
+$$
+\vec{B} = (1, 2, -1)
+$$
+
+Compute the cross product using the determinant form:
 
 $$
 \vec{v} \times \vec{B}
 =
-\begin{pmatrix}
+\begin{vmatrix}
 \hat{i} & \hat{j} & \hat{k} \\
 2 & -4 & 1 \\
 1 & 2 & -1
-\end{pmatrix}
+\end{vmatrix}
 $$
 
-Calculate each component:
+Expand the determinant:
 
 $$
 \vec{v} \times \vec{B}
@@ -68,6 +80,8 @@ $$
 +
 \hat{k}[(2)(2) - (-4)(1)]
 $$
+
+Simplify each component:
 
 $$
 \vec{v} \times \vec{B}
@@ -85,32 +99,38 @@ $$
 2\hat{i} + 3\hat{j} + 8\hat{k}
 $$
 
-The magnitude is
+Find the magnitude of this vector:
 
 $$
-|\vec{v} \times \vec{B}| =
+|\vec{v} \times \vec{B}|
+=
 \sqrt{2^2 + 3^2 + 8^2}
 $$
 
 $$
-|\vec{v} \times \vec{B}| =
+|\vec{v} \times \vec{B}|
+=
 \sqrt{4 + 9 + 64}
 $$
 
 $$
-|\vec{v} \times \vec{B}| =
+|\vec{v} \times \vec{B}|
+=
 \sqrt{77}
 $$
 
 $$
-|\vec{v} \times \vec{B}| \approx 8.775
+|\vec{v} \times \vec{B}|
+\approx 8.775
 $$
 
-Now calculate the force magnitude:
+Now calculate the magnetic force magnitude:
 
 $$
 F = q|\vec{v} \times \vec{B}|
 $$
+
+Substitute the values:
 
 $$
 F = (1.602 \times 10^{-19})(8.775)
@@ -128,4 +148,8 @@ $$
 
 ## Interpretation
 
-The proton experiences a very small magnetic force because the charge of a proton is very small. The force direction is along $\vec{v} \times \vec{B}$ because the proton has positive charge.
+The proton experiences a very small magnetic force because the proton charge is extremely small. Since the proton has positive charge, the force direction is the same as the direction of the vector product
+
+$$
+\vec{v} \times \vec{B}
+$$
