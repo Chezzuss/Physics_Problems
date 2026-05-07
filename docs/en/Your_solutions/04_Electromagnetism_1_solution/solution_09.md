@@ -18,18 +18,11 @@ Find the magnitude of the magnetic force on the proton.
 
 ## Theory
 
-The magnetic force acting on a moving charged particle is given by the Lorentz force equation:
+The magnetic force on a moving charge is
 
 $$
 \vec{F} = q\vec{v} \times \vec{B}
 $$
-
-where:
-
-- $\vec{F}$ is the magnetic force,
-- $q$ is the electric charge,
-- $\vec{v}$ is the velocity vector,
-- $\vec{B}$ is the magnetic field vector.
 
 For a proton,
 
@@ -45,52 +38,40 @@ $$
 
 ## Step-by-Step Solution
 
-The vectors are
-
-$$
-\vec{v} = (2, -4, 1)
-$$
-
-and
-
-$$
-\vec{B} = (1, 2, -1)
-$$
-
-Compute the cross product using the determinant form:
+First calculate the cross product:
 
 $$
 \vec{v} \times \vec{B}
 =
-\begin{vmatrix}
+\begin{pmatrix}
 \hat{i} & \hat{j} & \hat{k} \\
 2 & -4 & 1 \\
 1 & 2 & -1
-\end{vmatrix}
+\end{pmatrix}
 $$
 
-Expand the determinant:
-
-$$
-\vec{v} \times \vec{B}
-=
-\hat{i}[(-4)(-1) - (1)(2)]
--
-\hat{j}[(2)(-1) - (1)(1)]
-+
-\hat{k}[(2)(2) - (-4)(1)]
-$$
-
-Simplify each component:
+Using the component formula,
 
 $$
 \vec{v} \times \vec{B}
 =
-\hat{i}(4 - 2)
--
-\hat{j}(-2 - 1)
+(v_yB_z - v_zB_y)\hat{i}
 +
-\hat{k}(4 + 4)
+(v_zB_x - v_xB_z)\hat{j}
++
+(v_xB_y - v_yB_x)\hat{k}
+$$
+
+Substitute the components:
+
+$$
+\vec{v} \times \vec{B}
+=
+[(-4)(-1) - (1)(2)]\hat{i}
++
+[(1)(1) - (2)(-1)]\hat{j}
++
+[(2)(2) - (-4)(1)]\hat{k}
 $$
 
 $$
@@ -99,7 +80,7 @@ $$
 2\hat{i} + 3\hat{j} + 8\hat{k}
 $$
 
-Find the magnitude of this vector:
+Find its magnitude:
 
 $$
 |\vec{v} \times \vec{B}|
@@ -110,27 +91,15 @@ $$
 $$
 |\vec{v} \times \vec{B}|
 =
-\sqrt{4 + 9 + 64}
-$$
-
-$$
-|\vec{v} \times \vec{B}|
-=
 \sqrt{77}
-$$
-
-$$
-|\vec{v} \times \vec{B}|
 \approx 8.775
 $$
 
-Now calculate the magnetic force magnitude:
+Now calculate the force:
 
 $$
 F = q|\vec{v} \times \vec{B}|
 $$
-
-Substitute the values:
 
 $$
 F = (1.602 \times 10^{-19})(8.775)
@@ -148,8 +117,4 @@ $$
 
 ## Interpretation
 
-The proton experiences a very small magnetic force because the proton charge is extremely small. Since the proton has positive charge, the force direction is the same as the direction of the vector product
-
-$$
-\vec{v} \times \vec{B}
-$$
+The proton experiences a very small magnetic force because its charge is very small. Since the proton is positively charged, the force direction is the same as the direction of $\vec{v} \times \vec{B}$.
